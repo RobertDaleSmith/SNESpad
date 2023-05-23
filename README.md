@@ -81,6 +81,16 @@ This library was ported and substantially rewritten by Robert Dale Smith.
 
 Email: <robert@robertdalesmith.com>
 
+## Examples
+
+Included in this repository are three examples that demonstrate different use cases for the SNESpad library.
+
+1. [serial.ino](examples/serial/serial.ino) - Demonstrates how to use the SNESpad library to monitor a SNES controller over a USB serial connection.
+
+2. [hid.ino](examples/hid/hid.ino) - Demonstrates how to use the SNESpad library to create HID mouse and HID joystick USB devices using a SNES controller.
+
+3. [xinput.ino](examples/xinput/xinput.ino) - Demonstrates how to use the SNESpad library to create an XInput USB controller using a SNES controller or mouse.
+
 ## Changes and Enhancements
 
 This version of the library is optimized for performance and compatibility. Notable changes from the original Arduino version include:

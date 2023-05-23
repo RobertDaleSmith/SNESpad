@@ -1,6 +1,8 @@
 /*
   SNESpad - Arduino/Pico library for interfacing with SNES controllers
 
+  github.com/RobertDaleSmith/SNESpad
+
   Version: 2.0 (2023) - Extended to Pico SDK (Robert Dale Smith)
                       - Mouse and NES controller support (Robert Dale Smith)
   Version: 1.3 (11/12/2010) - get rid of shortcut constructor - seems to be broken
