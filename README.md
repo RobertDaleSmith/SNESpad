@@ -1,4 +1,4 @@
-# SNESpad for PicoSDK
+# SNESpad for Arduino and PicoSDK
 
 This is a library for the Raspberry Pi Pico that allows it to interface with a SNES controller. This library was adapted from the Arduino SNESpad library, with changes and optimizations made for better performance and compatibility with the Pico SDK.
 
@@ -8,7 +8,7 @@ This library is based on the [nespad](https://github.com/rahji/nespad) library d
 
 ## Features
 
-This library allows for the reading of button states from a SNES controller connected to the Pico. It supports the SNES basic controller, the NES controller, and the SNES Mouse. Each of these devices can be identified and read by this library.
+This library allows for the reading of button states from a SNES controller connected to a Pico or Arduino. It supports standard SNES controller, the NES controller, and the SNES Mouse. Each of these devices can be identified and read by this library.
 
 ## Usage
 
@@ -90,7 +90,10 @@ This version of the library is optimized for performance and compatibility. Nota
 
 ## Version History
 
-- Version: 2.0 (2023) - Ported and substantially rewritten for the Pico SDK by Robert Dale Smith.
+- Version: 2.0 (2023)
+    - Extended to Pico SDK (Robert Dale Smith)
+    - Total refactor of class structure. (Robert Dale Smith)
+    - Mouse and NES controller support (Robert Dale Smith)
 
 Below is a history of the original SNESpad library:
 
