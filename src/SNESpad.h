@@ -64,8 +64,8 @@
 #define SNES_MOUSE_ID       0b1000
 
 #define SNES_MOUSE_SLOW     0
-#define SNES_MOUSE_MEDIUM   1
-#define SNES_MOUSE_FAST     2
+#define SNES_MOUSE_MEDIUM   2
+#define SNES_MOUSE_FAST     1
 
 #define SNES_MOUSE_THRESHOLD 10  // max speed fails (Hyperkin compatiblity)
 #define SNES_MOUSE_PRECISION 1   // mouse movement velocity multiplier
