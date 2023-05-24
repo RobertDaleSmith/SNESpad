@@ -289,6 +289,11 @@ uint32_t SNESpad::read()
         if (i == 15) {
             bool read_extra = !bit; // check if mouse
             if (!read_extra) break; // skip extra bytes if not
+#ifdef ARDUINO
+            delayMicroseconds(12);
+#else
+            busy_wait_us(12);
+#endif
         }
     }
     ret = ~ret; // buttons are active low, so invert bits
