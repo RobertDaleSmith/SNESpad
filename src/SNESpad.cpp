@@ -272,7 +272,14 @@ uint32_t SNESpad::read()
     uint32_t ret = 0;
     uint8_t i;
 
-    uint32_t disconnected = clock(); // pulls low outside of 
+    /* A connected device will pull the data line low prior to latch.
+       A disconnected pin is kept high by internal pull_up.*/
+    uint32_t disconnected = false;
+#ifdef ARDUINO
+    disconnected = digitalRead(dataPin);
+#else
+    disconnected = gpio_get(dataPin);
+#endif
 
     latch();
     for (i = 0; i < 32; i++) {
