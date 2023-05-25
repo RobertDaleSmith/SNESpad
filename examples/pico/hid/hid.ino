@@ -1,0 +1,72 @@
+// SNES-2-USB (HID)
+// ================
+//
+// SNESpad example demonstrating SNES to
+// RP2040 based HID joystick USB devices.
+//
+
+#include <SNESpad.h>
+#include <Joystick.h> // https://github.com/benjaminaigner/Joystick/blob/main/docs/api.md
+
+// Pins for SNES controller
+#define CLOCK_PIN 5
+#define LATCH_PIN 6
+#define DATA_PIN 7
+
+SNESpad * snes = new SNESpad(CLOCK_PIN, LATCH_PIN, DATA_PIN);
+
+void setup() {
+  // initialize snes controller reading
+  snes->begin(); // init snes gpio
+  snes->start(); // init snes read
+
+  // initialize hid joystick output
+  Joystick.begin();
+}
+
+void loop() {
+  // read SNES controller button state
+  snes->poll();
+
+  // map SNES controller button state
+  Joystick.button(1, snes->buttonB); // BTTN SOUTH
+  Joystick.button(2, snes->buttonA); // BTTN EAST
+  Joystick.button(3, snes->buttonY); // BTTN WEST
+  Joystick.button(4, snes->buttonX); // BTTN NORTH
+  Joystick.button(5, snes->buttonL); // L
+  Joystick.button(6, snes->buttonR); // R
+  Joystick.button(7, false);  // L2
+  Joystick.button(8, false);  // R2
+  Joystick.button(9, snes->buttonSelect); // Select
+  Joystick.button(10, snes->buttonStart); // Start
+  Joystick.button(11, false); // L3
+  Joystick.button(12, false); // R3
+  Joystick.button(17, false); // PS/XBOX Button
+  Joystick.button(18, false); // PS Touch Pad
+  Joystick.button(13, snes->directionUp);    // DPAD UP
+  Joystick.button(14, snes->directionDown);  // DPAD DOWN
+  Joystick.button(15, snes->directionLeft);  // DPAD LEFT
+  Joystick.button(16, snes->directionRight); // DPAD RIGHT
+
+  // // DPAD to Analog Stick
+  // Joystick.use8bit(true);
+  // if (btns & SNES_LEFT) Joystick.X(-127);
+  // else if (btns & SNES_RIGHT) Joystick.X(128);
+  // else Joystick.X(0);
+  //
+  // if (btns & SNES_DOWN) Joystick.Y(-127);
+  // else if (btns & SNES_UP) Joystick.Y(128);
+  // else Joystick.Y(0);
+
+  // if SNES mouse, then map mouse output
+  if (snes->type == SNES_PAD_MOUSE) {
+    int mouseX = snes->mouseX-127;  //set center position [0-255]
+    int mouseY = snes->mouseY-127;
+
+    // send hid joystick movements
+    if (mouseY > 0) Joystick.button(13, snes->directionUp);  // North
+    if (mouseY < 0) Joystick.button(14, snes->directionDown); // South
+    if (mouseX > 0) Joystick.button(15, snes->directionLeft);  // East
+    if (mouseX < 0) Joystick.button(16, snes->directionRight); // West
+  }
+}
