@@ -1,8 +1,8 @@
-// SNES-2-USB (HID)
+// SNES-2-USB (arduino/HID)
 // ================
 //
 // SNESpad example demonstrating SNES to
-// HID mouse and HID joystick USB devices.
+// Arduino based HID joystick/mouse USB devices.
 //
 
 #include <SNESpad.h>

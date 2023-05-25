@@ -1,4 +1,4 @@
-// SNES-2-USB (HID)
+// SNES-2-USB (pico/HID-joystick)
 // ================
 //
 // SNESpad example demonstrating SNES to
@@ -22,6 +22,7 @@ void setup() {
 
   // initialize hid joystick output
   Joystick.begin();
+  Joystick.use8bit(true);
 }
 
 void loop() {
@@ -49,7 +50,7 @@ void loop() {
   Joystick.button(16, snes->directionRight); // DPAD RIGHT
 
   // // DPAD to Analog Stick
-  // Joystick.use8bit(true);
+   
   // if (btns & SNES_LEFT) Joystick.X(-127);
   // else if (btns & SNES_RIGHT) Joystick.X(128);
   // else Joystick.X(0);
@@ -63,10 +64,14 @@ void loop() {
     int mouseX = snes->mouseX-127;  //set center position [0-255]
     int mouseY = snes->mouseY-127;
 
-    // send hid joystick movements
-    if (mouseY > 0) Joystick.button(13, snes->directionUp);  // North
-    if (mouseY < 0) Joystick.button(14, snes->directionDown); // South
-    if (mouseX > 0) Joystick.button(15, snes->directionLeft);  // East
-    if (mouseX < 0) Joystick.button(16, snes->directionRight); // West
+    // mouse to left analog stick
+    Joystick.X(mouseX);
+    Joystick.Y(mouseY);
+
+    // mouse to dpad buttons
+    //Joystick.button(13, mouseY > 0); // North
+    //Joystick.button(14, mouseY < 0); // South
+    //Joystick.button(15, mouseX > 0); // East
+    //Joystick.button(16, mouseX < 0); // West
   }
 }
