@@ -91,6 +91,20 @@ Included in this repository are three examples that demonstrate different use ca
 
 3. [xinput.ino](examples/xinput/xinput.ino) - Demonstrates how to use the SNESpad library to create an XInput USB controller using a SNES controller or mouse.
 
+## Compatibility and Hardware
+
+This project is designed with a custom PCB that interfaces the SNES pins with the GPIO of an Arduino Nano. The board uses a common pinout and is also compatible with any board that matches the Arduino Pro Micro footprint. 
+
+While the serial example can work with any Arduino, the XInput and HID examples are limited to boards similar to the Arduino Pro Micro, due to the requirement of native USB support by the MCU.
+
+You can find the open-source board design at Flux.ai:
+
+[SNES Controller Arduino Nano Shield](https://www.flux.ai/robertdalesmith/snes-controller-arduino-nano-shield)
+
+![SNES Controller Arduino Nano Shield](assets/PCB_image.png)
+
+Please replace "PCB_image.png" with the actual filename of the image.
+
 ## Changes and Enhancements
 
 This version of the library is optimized for performance and compatibility. Notable changes from the original Arduino version include:
