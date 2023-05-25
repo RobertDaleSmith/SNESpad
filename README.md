@@ -101,9 +101,7 @@ You can find the open-source board design at Flux.ai:
 
 [SNES Controller Arduino Nano Shield](https://www.flux.ai/robertdalesmith/snes-controller-arduino-nano-shield)
 
-![SNES Controller Arduino Nano Shield](assets/PCB_image.png)
-
-Please replace "PCB_image.png" with the actual filename of the image.
+<img src="assets/PCB_image.png" width="500">
 
 ## Changes and Enhancements
 
