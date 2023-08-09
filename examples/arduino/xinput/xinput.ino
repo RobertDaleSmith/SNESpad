@@ -11,9 +11,11 @@
 // Pins for SNES controller
 #define CLOCK_PIN 5
 #define LATCH_PIN 6
-#define DATA_PIN 7
+#define DATA0_PIN 7
+#define DATA1_PIN 8
+#define IOSEL_PIN 9
 
-SNESpad * snes = new SNESpad(CLOCK_PIN, LATCH_PIN, DATA_PIN);
+SNESpad * snes = new SNESpad(CLOCK_PIN, LATCH_PIN, DATA0_PIN, DATA1_PIN, IOSEL_PIN);
 
 void setup() {
   // initialize snes controller reading
