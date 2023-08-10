@@ -1,6 +1,6 @@
 # SNESpad for Arduino and PicoSDK
 
-This is a library for the Raspberry Pi Pico that allows it to interface with a SNES controller. This library was adapted from the Arduino SNESpad library, with changes and optimizations made for better performance and compatibility with the Pico SDK.
+This is a library for the Raspberry Pi Pico that allows it to interface with SNES controller peripherals. This library was adapted from the Arduino SNESpad library, with changes to optimize performance, add support for more SNES device types, and compatibility with the Pico SDK.
 
 ## Original Library
 
@@ -8,7 +8,7 @@ This library is based on the [nespad](https://github.com/rahji/nespad) library d
 
 ## Features
 
-This library allows for the reading of button states from a SNES controller connected to a Pico or Arduino. It supports standard SNES controller, the NES controller, and the SNES Mouse. Each of these devices can be identified and read by this library.
+This library allows for the reading of button states from a SNES controller connected to a Pico or Arduino. It supports standard SNES controller, the NES controller, the SNES Mouse, and even the SNES XBand Keyboard. Each of these devices can be identified and read by this library.
 
 ## Usage
 
@@ -85,13 +85,27 @@ Email: <robert@robertdalesmith.com>
 
 Included in this repository are three examples that demonstrate different use cases for the SNESpad library.
 
-1. [serial.ino](examples/serial/serial.ino) - Demonstrates how to use the SNESpad library to monitor a SNES controller over a USB serial connection.
+1. [serial-print.ino](examples/serial-print/serial-print.ino) - Demonstrates how to use the SNESpad library to monitor compatible SNES devices over a USB serial monitor.
 
-2. [hid.ino](examples/hid/hid.ino) - Demonstrates how to use the SNESpad library to create HID mouse and HID joystick USB devices using a SNES controller.
+2. [hid-gamepad-mouse-keyboard.ino](examples/arduino-only/hid-gamepad-mouse-keyboard.ino) - Demonstrates how to use the SNESpad library to create and all-in-one mouse, keyboard and gamepad USB HID device for Arduino devices.
 
-3. [xinput.ino](examples/xinput/xinput.ino) - Demonstrates how to use the SNESpad library to create an XInput USB controller using a SNES controller or mouse.
+3. [xinput-gamepad.ino](examples/arduino-only/xinput-gamepad/xinput-gamepad.ino) - Demonstrates how to use the SNESpad library to create an Arduino XInput USB controller using a SNES controller or mouse.
 
 ## Compatibility and Hardware
+
+### SNES Peripherials
+
+- [x] Generic SNES Controllers
+- [x] Generic NES Controllers
+- [x] Official Super NES Mouse
+- [x] Hyperkin SNES Mouse
+- [x] XBand Keyboard
+- [ ] NTT Controller
+- [ ] Super Multitap
+- [ ] Konami Justifier
+- [ ] Super Scope
+
+### Microcontrollers
 
 This project is designed with a custom PCB that interfaces the SNES pins with the GPIO of an Arduino Nano. The board uses a common pinout and is also compatible with any board that matches the Arduino Pro Micro footprint. 
 
