@@ -1,8 +1,8 @@
-// SNES-2-USB (arduino/HID)
+// SNES-2-USB (arduino/hid-gamepad-mouse-keyboard)
 // ================
 //
-// SNESpad example demonstrating SNES to Arduino
-// based HID gamepad/keyboard/mouse USB devices.
+// SNESpad example demonstrating SNES to Arduino based
+// HID gamepad/keyboard/mouse USB all-in-one devices.
 //
 
 #include <SNESpad.h>
