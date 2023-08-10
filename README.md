@@ -85,11 +85,17 @@ Email: <robert@robertdalesmith.com>
 
 Included in this repository are three examples that demonstrate different use cases for the SNESpad library.
 
-1. [serial-print.ino](examples/serial-print/serial-print.ino) - Demonstrates how to use the SNESpad library to monitor compatible SNES devices over a USB serial monitor.
+1. [serial-print.ino](examples/serial-print/serial-print.ino) - Demonstrates how to use the SNESpad library to monitor all supported SNES peripherials over a USB serial monitor.
 
-2. [hid-gamepad-mouse-keyboard.ino](examples/arduino-only/hid-gamepad-mouse-keyboard.ino) - Demonstrates how to use the SNESpad library to create and all-in-one mouse, keyboard and gamepad USB HID device for Arduino devices.
+2. [hid-gamepad.ino](examples/arduino-only/hid-gamepad/hid-gamepad.ino) - Demonstrates how to use the SNESpad library to create an Arduino HID USB gamepad.
 
-3. [xinput-gamepad.ino](examples/arduino-only/xinput-gamepad/xinput-gamepad.ino) - Demonstrates how to use the SNESpad library to create an Arduino XInput USB controller using a SNES controller or mouse.
+3. [hid-mouse.ino](examples/hid-mouse/hid-mouse.ino) - Demonstrates how to use the SNESpad library to convert a Super NES mouse to USB HID mouse device.
+
+4. [hid-keyboard.ino](examples/hid-keyboard/hid-keyboard.ino) - Demonstrates how to use the SNESpad library to create a SNES Xband Keyboard to USB HID keyboard device.
+
+5. [xinput-gamepad.ino](examples/arduino-only/xinput-gamepad/xinput-gamepad.ino) - Demonstrates how to use the SNESpad library to create an Arduino XInput USB controller using a SNES controller or mouse.
+
+6. [hid-gamepad-mouse-keyboard.ino](examples/arduino-only/hid-gamepad-mouse-keyboard.ino) - Demonstrates how to use the SNESpad library to create an all-in-one mouse, keyboard and gamepad USB HID device for Arduino devices.
 
 ## Compatibility and Hardware
 
