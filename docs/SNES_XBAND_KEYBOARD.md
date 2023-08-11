@@ -2,23 +2,26 @@
 
 The XBand keyboard data is read by the console using both DATA lines on pins 4 and 5 as well as the IOBBIT on pin 6. After a normal 16-bit controller read, the XBand keyboard begins communication when the IOBIT line is set low. Then data bits are clocked in from both data lines simultaneously. So for example, the first clock pulse would read in bits 0 and 1 from DATA lines 0 and 1. Continuing until the keyboard scancode buffer read is completed and the IOBIT line is set back to high.
 
-The keyboard data read starts with an 8-bit keyboard_id of 0x78. Then the next 4-bits are a number between 0-15, indicating the number of scancode bytes to be clocked-in.
+The keyboard data read starts with an 8-bit keyboard_id of `0x78`. Then the next 4-bits are a number between 0-15, indicating the number of scancode bytes ready to be clocked-in next.
 
 Each keyboard key press is reported as unique scancode byte. Normal keys just report their single unique 8-bit scancode. While special and meta keys report an extra scancode to indicate when the key is released (0xf0). Additionally special keys are preceeded by a special key scancode (0xe0).
 
+```
 Normal keys:
-nn (pressed)
+nn            (pressed)
 
-Meta keys: (ctrl, alt, shift, capslock, xband, joy-pad keys)
-nn (pressed)
-f0, nn (released)
+Meta keys:    (CTRL, ALT, SHIFT, CAPS_LOCK, XBAND, Controller button keys)
+nn            (pressed)
+f0, nn        (released)
 
-Special keys: (up, down, left, right)
-e0, nn (pressed)
-e0, f0, nn (released)
+Special keys: (UP, DOWN, LEFT, RIGHT)
+e0, nn        (pressed)
+e0, f0, nn    (released)
+```
 
 ## Normal/Meta Key Scancode Table (without prefix)
-
+ex: `ENTER == 0x5A`
+```
  ____0xh___1xh___2xh___3xh___4xh___5xh___6xh___7xh_____8xh_____9xh___
   x0h ---   ---   ---   ---   ---   ---   ---   NUM-0   OPENX   ---
   x1h F1    LALT  C     N     ,<    ---   ---   NUM-.   CLOSEDX ---
@@ -29,20 +32,22 @@ e0, f0, nn (released)
   x6h F6    1!    3#    6^    9(    ---   BS    ESC     JOY-A   ---
   x7h F7    ---   ---   ---   ---   ---   ---   NUM-DIV JOY-B   ---
   x8h F8    ---   ---   ---   ---   CAPS  ---   ---     JOY-X   ---
-  x9h F9    ---   SPACE ---   .>    SHF2? NUM-1 NUM-RET JOY-Y   ---
+  x9h F9    ---   SPACE ---   .>    RSHFT NUM-1 NUM-RET JOY-Y   ---
   xAh F10   Z     V     M     /?    ENTER ---   NUM-3   JOY-L   ---
   xBh F11   S     F     J     L     ]}    NUM-4 ---     JOY-R   ---
   xCh F12   A     T     U     ;:    \|    NUM-7 NUM-ADD SELECT  ---
   xDh TAB   W     R     7&    P     \|    ---   NUM-9   START   ---
-  xEh \`~    2@    5%    8*    -_    ---   ---   NUM-MUL ---     ---
+  xEh `~    2@    5%    8*    -_    ---   ---   NUM-MUL ---     ---
   xFh ---   ---   ---   ---   ---   ---   ---   ---     ---     ---
-
+```
 ## Special Scancodes (with E0h-prefix)
- E0h,5Ah  JOY-A (alternate to normal scancode 86h)
- E0h,6Bh  LEFT
- E0h,72h  DOWN
- E0h,74h  RIGHT
- E0h,75h  UP
+```
+ 0xE0, 0x5Ah  JOY-A? (alternate to normal scancode 86h)
+ 0xE0, 0x6Bh  LEFT
+ 0xE0, 0x72h  DOWN
+ 0xE0, 0x74h  RIGHT
+ 0xE0, 0x75h  UP
+```
 
 ## Read Keyboard ID Only
 
