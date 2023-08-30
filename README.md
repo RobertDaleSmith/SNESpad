@@ -49,9 +49,11 @@ Here is an example of how to create a SNESpad object and read the state of the b
 
 #define CLOCK 0
 #define LATCH 1
-#define DATA 2
+#define DATA0 2
+#define DATA1 -1 // optional (required for super multitap, scope, xband keyboard, etc)
+#define IOSEL -1 //
 
-SNESpad snespad(CLOCK, LATCH, DATA);
+SNESpad snespad(CLOCK, LATCH, DATA0, DATA1, IOSEL);
 
 void setup() {
     snespad.begin();
