@@ -56,12 +56,12 @@ Here is an example of how to create a SNESpad object and read the state of the b
 SNESpad snespad(CLOCK, LATCH, DATA0, DATA1, IOSEL);
 
 void setup() {
-    snespad.begin();
-    snespad.start();
+    snespad.begin(); // init lib and gpio
+    snespad.start(); // detect controller
 }
 
 void loop() {
-    snespad.poll();
+    snespad.poll(); // poll for controller data
 
     if (snespad.buttonA) {
         printf("Button A is pressed.\n");
