@@ -168,6 +168,13 @@ typedef struct {
     uint8_t scancodes_len;
     bool caps_locked;
 
+    // Rumble output (LRG protocol via IOBit)
+    uint16_t rumble_frame;      // 16-bit frame to shift out (0x72XX)
+    uint8_t  rumble_bit_pos;    // Current bit position (15..0)
+    bool     rumble_active;     // Whether we have a frame to send
+    uint8_t  rumble_left;       // Current left motor intensity (0-15)
+    uint8_t  rumble_right;      // Current right motor intensity (0-15)
+
     // Debug/internal
     uint32_t last_read;
 } snespad_t;
@@ -213,6 +220,15 @@ snespad_key_mapping_t snespad_get_key_from_scancode(uint8_t scancode, bool speci
 //   pad     - Pointer to snespad_t structure
 //   enabled - true to turn on caps lock LED
 void snespad_set_caps_lock_led(snespad_t* pad, bool enabled);
+
+// Set rumble motor intensities (LRG SNES Rumble protocol)
+// Sends 0x72 magic header + motor data via IOBit during clock cycles.
+// Safe to call on standard controllers (IOBit is ignored).
+// Parameters:
+//   pad   - Pointer to snespad_t structure
+//   left  - Left motor intensity (0-255, scaled to 0-15)
+//   right - Right motor intensity (0-255, scaled to 0-15)
+void snespad_set_rumble(snespad_t* pad, uint8_t left, uint8_t right);
 
 #ifdef __cplusplus
 }

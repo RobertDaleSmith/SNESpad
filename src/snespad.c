@@ -318,10 +318,20 @@ static void snespad_set_mouse_speed(snespad_t* pad)
     }
 }
 
-// Clock in a single data bit
+// Clock in a single data bit (and shift out rumble data on IOBit)
 static uint32_t snespad_clock_bit(snespad_t* pad, uint8_t data_pin)
 {
     uint32_t ret;
+
+    // Set IOBit for rumble data BEFORE clock pulse
+    if (pad->rumble_active) {
+        gpio_write(pad->iobit_pin, (pad->rumble_frame >> pad->rumble_bit_pos) & 1);
+        if (pad->rumble_bit_pos == 0) {
+            pad->rumble_bit_pos = 15;  // Wrap for continuous sending
+        } else {
+            pad->rumble_bit_pos--;
+        }
+    }
 
     gpio_write(pad->clock_pin, 0);
     delay_us(12);
@@ -560,6 +570,12 @@ void snespad_init(snespad_t* pad, uint8_t clock, uint8_t latch,
     pad->caps_locked = false;
     pad->last_read = 0;
 
+    pad->rumble_frame = 0;
+    pad->rumble_bit_pos = 15;
+    pad->rumble_active = false;
+    pad->rumble_left = 0;
+    pad->rumble_right = 0;
+
     for (int i = 0; i < 16; i++) {
         pad->scancodes[i] = 0;
     }
@@ -765,4 +781,25 @@ snespad_key_mapping_t snespad_get_key_from_scancode(uint8_t scancode, bool speci
 void snespad_set_caps_lock_led(snespad_t* pad, bool enabled)
 {
     pad->caps_locked = enabled;
+}
+
+void snespad_set_rumble(snespad_t* pad, uint8_t left, uint8_t right)
+{
+    // Scale 0-255 → 0-15
+    uint8_t l = left >> 4;
+    uint8_t r = right >> 4;
+
+    // Only update if changed
+    if (l == pad->rumble_left && r == pad->rumble_right) return;
+
+    pad->rumble_left = l;
+    pad->rumble_right = r;
+
+    // Build frame: 0x72 header + rumble byte (high nibble = right, low = left)
+    pad->rumble_frame = 0x7200 | (r << 4) | l;
+    pad->rumble_bit_pos = 15;
+    pad->rumble_active = true;
+
+    // If both motors off, send one final frame with zeros to clear
+    // (rumble_active stays true so the zero-frame gets clocked out)
 }
